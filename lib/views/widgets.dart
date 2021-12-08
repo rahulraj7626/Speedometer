@@ -6,20 +6,26 @@ Widget row1() {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text('16:42 feb'),
       Icon(
         Icons.shortcut,
         color: color4,
-      )
+      ),
+      Text('Turn right in 45 meters',
+          style: TextStyle(
+            fontSize: 8,
+            color: Colors.white,
+          )),
     ],
   );
 }
 
 Widget row2() {
   return Container(
-      height: 200,
-      width: 200,
+      height: 250,
+      padding: EdgeInsets.all(10),
+      width: 250,
       decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage('assets/speed.png')),
         color: color5,
         shape: BoxShape.circle,
       ),
@@ -45,11 +51,15 @@ Widget row3() {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text('16:42 feb'),
       Icon(
-        Icons.arrow_right_alt,
-        color: color4,
-      )
+        Icons.bluetooth,
+        color: color6,
+      ),
+      Text('Smartphone Connected',
+          style: TextStyle(
+            fontSize: 8,
+            color: Colors.white,
+          )),
     ],
   );
 }
@@ -57,67 +67,69 @@ Widget row3() {
 Widget _getRadialGauge() {
   return SfRadialGauge(
       enableLoadingAnimation: true,
-      title: GaugeTitle(
+      title: const GaugeTitle(
           text: '',
           textStyle: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
       axes: <RadialAxis>[
         RadialAxis(
-            axisLineStyle: AxisLineStyle(
-              thickness: 0.1,
+            axisLineStyle: const AxisLineStyle(
+              thickness: 0.0,
               thicknessUnit: GaugeSizeUnit.factor,
-              color: Colors.deepPurple,
+              color: Colors.blueAccent,
             ),
             minimum: 0,
             maximum: 150,
-            ranges: <GaugeRange>[
-              GaugeRange(
-                  startValue: 0,
-                  endValue: 50,
-                  color: Colors.deepPurple,
-                  startWidth: 10,
-                  endWidth: 10),
-              GaugeRange(
-                  startValue: 50,
-                  endValue: 100,
-                  color: Colors.deepPurple,
-                  startWidth: 10,
-                  endWidth: 10),
-              GaugeRange(
-                  startValue: 100,
-                  endValue: 150,
-                  color: Colors.deepPurple,
-                  startWidth: 10,
-                  endWidth: 10)
-            ],
+            // ranges: <GaugeRange>[
+            //   GaugeRange(
+            //       startValue: 0,
+            //       endValue: 50,
+            //       color: Colors.black.withOpacity(0.1),
+            //       startWidth: 10,
+            //       endWidth: 10),
+            //   GaugeRange(
+            //       startValue: 50,
+            //       endValue: 100,
+            //       color: Colors.deepPurple,
+            //       startWidth: 10,
+            //       endWidth: 10),
+            //   GaugeRange(
+            //       startValue: 100,
+            //       endValue: 150,
+            //       color: Colors.deepPurple,
+            //       startWidth: 10,
+            //       endWidth: 10)
+            // ],
             pointers: <GaugePointer>[
               NeedlePointer(
-                  knobStyle: KnobStyle(color: Colors.blueAccent),
+                  knobStyle: KnobStyle(color: Colors.transparent),
                   enableDragging: true,
                   enableAnimation: true,
-                  needleColor: Colors.deepOrange,
-                  needleEndWidth: 1,
-                  needleLength: 1,
-                  needleStartWidth: 10,
+                  needleColor: Color(0xFFFF00E1),
+                  needleEndWidth: 0,
+                  needleLength: 0.95,
+                  needleStartWidth: 3,
                   gradient: LinearGradient(
-                      begin: Alignment.bottomRight,
-                      stops: [
-                        0.1,
-                        0.9
-                      ],
-                      colors: [
-                        Colors.orange.withOpacity(.8),
-                        Colors.orange.withOpacity(.2)
-                      ]),
-                  value: 1)
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topLeft,
+                    colors: [
+                      Color(0xFF3639FF).withOpacity(0),
+                      Color(0xFF0BDF52).withOpacity(0),
+                      Color(0xFFFF00E1).withOpacity(0.1),
+                      Color(0xFFFF00E1).withOpacity(.9)
+                    ],
+                  ),
+                  value: 10)
             ],
             annotations: <GaugeAnnotation>[
               GaugeAnnotation(
                   widget: Container(
-                      child: Text('90.0',
+                      child: Text('137.0',
                           style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold))),
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w300))),
                   angle: 90,
-                  positionFactor: 0.9)
+                  positionFactor: 0.0)
             ])
       ]);
 }
