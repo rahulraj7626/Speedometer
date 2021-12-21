@@ -55,7 +55,7 @@ Widget row3(km) {
           TextSpan(
             children: [
               TextSpan(
-                text: km.toString(),
+                text: km.toStringAsFixed(2),
                 style: const TextStyle(
                     color: Colors.white70,
                     fontSize: 24,
