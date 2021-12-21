@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:speedodashboard/views/constants.dart';
 import 'package:speedodashboard/views/widgets.dart';
 import 'dart:math';
@@ -24,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _clockTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         speed = rng.nextInt(140).toDouble() + 10;
-        print(speed);
       });
     });
   }
@@ -41,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return Scaffold(
       backgroundColor: color3,
       body: GestureDetector(
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           _stopWalk();
         },
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -70,9 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget row2() {
     return Container(
         height: 250,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         width: 250,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(image: AssetImage('assets/speed.png')),
           color: color5,
           shape: BoxShape.circle,
@@ -117,10 +118,10 @@ class _HomeScreenState extends State<HomeScreen> {
               // ],
               pointers: <GaugePointer>[
                 NeedlePointer(
-                    knobStyle: KnobStyle(color: Colors.transparent),
+                    knobStyle: const KnobStyle(color: Colors.transparent),
                     enableDragging: true,
                     enableAnimation: true,
-                    needleColor: Color(0xFFFF00E1),
+                    needleColor: const Color(0xFFFF00E1),
                     needleEndWidth: 0,
                     needleLength: 0.95,
                     needleStartWidth: 3,
@@ -128,22 +129,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       begin: Alignment.bottomRight,
                       end: Alignment.topLeft,
                       colors: [
-                        Color(0xFF3639FF).withOpacity(0),
-                        Color(0xFF0BDF52).withOpacity(0),
-                        Color(0xFFFF00E1).withOpacity(0.1),
-                        Color(0xFFFF00E1).withOpacity(.9)
+                        const Color(0xFF3639FF).withOpacity(0),
+                        const Color(0xFF0BDF52).withOpacity(0),
+                        const Color(0xFFFF00E1).withOpacity(0.1),
+                        const Color(0xFFFF00E1).withOpacity(.9)
                       ],
                     ),
                     value: speed)
               ],
               annotations: <GaugeAnnotation>[
                 GaugeAnnotation(
-                    widget: Container(
-                        child: Text(speed.toString(),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.w300))),
+                    widget: Text(speed.toString(),
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w300)),
                     angle: 90,
                     positionFactor: 0.0)
               ])

@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class MyHomePage extends StatefulWidget {
-  /// Creates the instance of MyHomePage
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -15,12 +14,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _getRadialGauge() {
     return SfRadialGauge(
         enableLoadingAnimation: true,
-        title: GaugeTitle(
+        title: const GaugeTitle(
             text: '',
             textStyle: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
         axes: <RadialAxis>[
           RadialAxis(
-              axisLineStyle: AxisLineStyle(
+              axisLineStyle: const AxisLineStyle(
                 thickness: 0.1,
                 thicknessUnit: GaugeSizeUnit.factor,
                 color: Colors.deepPurple,
@@ -49,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
               pointers: <GaugePointer>[
                 NeedlePointer(
-                    knobStyle: KnobStyle(color: Colors.blueAccent),
+                    knobStyle: const KnobStyle(color: Colors.blueAccent),
                     enableDragging: true,
                     enableAnimation: true,
                     needleColor: Colors.deepOrange,
@@ -58,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     needleStartWidth: 10,
                     gradient: LinearGradient(
                         begin: Alignment.bottomRight,
-                        stops: [
+                        stops: const [
                           0.9,
                           0.1
                         ],
@@ -68,12 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ]),
                     value: 33)
               ],
-              annotations: <GaugeAnnotation>[
+              annotations: const <GaugeAnnotation>[
                 GaugeAnnotation(
-                    widget: Container(
-                        child: Text('90.0',
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold))),
+                    widget: Text('90.0',
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold)),
                     angle: 90,
                     positionFactor: 0.9)
               ])
