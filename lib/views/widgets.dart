@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:speedodashboard/views/constants.dart';
 
-Widget row1() {
+Widget row1(String date, String time) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 15),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        const Text.rich(
+        Text.rich(
           TextSpan(
             children: [
               TextSpan(
-                text: '16:42',
-                style: TextStyle(
+                text: time,
+                style: const TextStyle(
                     color: Colors.white70,
-                    fontSize: 26,
+                    fontSize: 24,
                     fontWeight: FontWeight.w400),
               ),
               TextSpan(
-                  text: '  11 feb',
-                  style: TextStyle(
-                      fontSize: 16,
+                  text: '  ' + date,
+                  style: const TextStyle(
+                      fontSize: 14,
                       fontWeight: FontWeight.w300,
                       color: Colors.white60)),
             ],
@@ -45,26 +45,26 @@ Widget row1() {
   );
 }
 
-Widget row3() {
+Widget row3(km) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 15),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        const Text.rich(
+        Text.rich(
           TextSpan(
             children: [
               TextSpan(
-                text: '500.3',
-                style: TextStyle(
+                text: km.toString(),
+                style: const TextStyle(
                     color: Colors.white70,
-                    fontSize: 26,
+                    fontSize: 24,
                     fontWeight: FontWeight.w400),
               ),
-              TextSpan(
+              const TextSpan(
                   text: '  Km left',
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w300,
                       color: Colors.white60)),
             ],

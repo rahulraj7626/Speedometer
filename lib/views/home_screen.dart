@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:speedodashboard/views/constants.dart';
 import 'package:speedodashboard/views/widgets.dart';
 import 'dart:math';
-
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,6 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
     _clockTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         speed = rng.nextInt(140).toDouble() + 10;
+        if (km > 10000) {
+          km = 0;
+        } else {
+          km = km + speed / 10;
+        }
       });
     });
   }
@@ -33,10 +38,28 @@ class _HomeScreenState extends State<HomeScreen> {
     _clockTimer!.cancel();
   }
 
+  double km = 0;
+  String date = DateFormat.MMMMd().format(DateTime.now());
+  String timee = DateFormat.Hm().format(DateTime.now());
+  sec5Timer() {
+    _clockTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        date = DateFormat.MMMMd().format(DateTime.now());
+        timee = DateFormat.Hm().format(DateTime.now());
+      });
+    });
+  }
+
   _stopWalk() {
     setState(() {
       _isWalking = !_isWalking;
     });
+  }
+
+  @override
+  void initState() {
+    sec5Timer();
+    super.initState();
   }
 
   @override
@@ -58,9 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Flexible(flex: 1, child: Container(child: row1())),
+              Flexible(flex: 1, child: Container(child: row1(date, timee))),
               Flexible(flex: 1, child: Container(child: row2())),
-              Flexible(flex: 1, child: Container(child: row3())),
+              Flexible(flex: 1, child: Container(child: row3(km))),
             ],
           ),
         ),
