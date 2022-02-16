@@ -1,5 +1,8 @@
 import 'dart:async';
-
+import 'dart:convert';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:speedodashboard/views/constants.dart';
@@ -20,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Timer? _clockTimer;
   Color? newColor = Colors.blueAccent;
   double speed = 0;
+  double api_speed = 0;
   var rng = Random();
   _randomColorFun() {
     _clockTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -50,6 +54,28 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future speedApi() async {
+    var mapResponse;
+
+    http.Response response;
+    response = await http.get(
+      Uri.parse('http://192.168.137.1/mat/data.php'),
+    );
+    if (response.statusCode == 200) {
+      mapResponse = jsonDecode(response.body);
+      print(mapResponse.toString());
+      setState(() {
+        api_speed = double.parse(mapResponse.toString());
+      });
+    } else {}
+  }
+
+  apiTimer() {
+    _clockTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      speedApi();
+    });
+  }
+
   _stopWalk() {
     setState(() {
       _isWalking = !_isWalking;
@@ -59,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     sec5Timer();
+    apiTimer();
     super.initState();
   }
 
@@ -158,11 +185,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         const Color(0xFFFF00E1).withOpacity(.9)
                       ],
                     ),
-                    value: speed)
+                    value: api_speed)
               ],
               annotations: <GaugeAnnotation>[
                 GaugeAnnotation(
-                    widget: Text(speed.toString(),
+                    widget: Text(api_speed.toString(),
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 25,
